@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="test">
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<link rel="stylesheet" type="text/css" href="css/index.css"/>
+		<script src="https://cdn.bootcss.com/angular.js/1.5.8/angular.js"></script>
+		<script src="js/jquery.js"></script>
+		<script src="js/index.js"></script>
+	</head>
+	<body ng-controller="textCtrl">
+		<div id="main1">
+			<div class="l">
+				<div class="T">
+					<div class="TL">
+						<div class="TL-con">
+							<div class="text1">提醒事项</div>
+							<div class="img1"></div>
+							<div class="img2"></div>
+						</div>
+					</div>
+					<div class="TR">
+						<div class="img3" ng-click="addList();save2local()"></div>
+					</div>
+				</div>
+				
+				<div class="B">
+					<div class="B-con">
+						<div my-ul>
+							<div class="finish list">
+								<div class="finish-con">
+								<div class="img4"></div>
+									<div class="text2">已计划</div>
+								</div>
+								<div class="bottom"></div>
+							</div>
+							<div class="noFinish">
+								
+									<div class="list" ng-repeat="v in colors track by $index" ng-class='{active:cu==$index}'>
+										<div class="list-con">
+											<div class="color {{v.them}}"></div>
+											<div class="title">
+											<input type='text' ng-model="v.name" ng-keyup="save2local()">
+											</div>
+
+											<div class="wifi"></div>
+										</div>
+										<div class="bottom1"></div>
+									</div>
+								
+								<!--<div class="list">
+									<div class="list-con">
+										<div class="color colortwo"></div>
+										<div class="title">新列表</div>
+										<div class="wifi"></div>
+									</div>
+									<div class="bottom bottom1"></div>
+								</div>
+								<div class="list">
+									<div class="list-con">
+										<div class="color colorthree"></div>
+										<div class="title">新列表</div>
+										<div class="wifi"></div>
+									</div>
+									<div class="bottom bottom1"></div>
+								</div>
+								<div class="list">
+									<div class="list-con">
+										<div class="color colorfour"></div>
+										<div class="title">新列表</div>
+										<div class="wifi"></div>
+									</div>
+									<div class="bottom bottom1"></div>
+								</div>
+								<div class="list">
+									<div class="list-con">
+										<div class="color colorfive"></div>
+										<div class="title">新列表</div>
+										<div class="wifi"></div>
+									</div>
+									<div class="bottom bottom1"></div>
+								</div>
+								<div class="list">
+									<div class="list-con">
+										<div class="color colorsix"></div>
+										<div class="title">新列表</div>
+										<div class="wifi"></div>
+									</div>
+									<div class="bottom bottom1"></div>
+								</div>-->
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			
+			<div class="r">
+				<div class="search">
+					<div class="searchL">
+						<div class="img5">
+							<div></div>
+						</div>
+						<div class="ts">
+							<div>搜索所有提醒</div>
+							<input type="text" class="ts-text" value="搜索所有提醒">
+						</div>
+					</div>
+					<div class="searchR">
+						<div class="searchR-con">
+							<label class="user">王姣姣</label>
+							<div class="xl"></div>
+						</div>
+						<div class="su"></div>
+						<div class="help">
+							<div class="help-ico"></div>
+						</div>
+					</div>
+				</div>
+				
+				<div id="ul">
+					<div class="ul-box">
+						<div class="title1">
+							<div class="tm {{colors[cu].them}}">{{colors[cu].name}}</div>
+							<div add-btn class="select {{colors[cu].them}}" >选项</div>
+						</div>
+						<div class="titleB">
+							<div class="bottom bottom2 bottom3"></div>
+							<div class="inner">
+								<div class="list1" style="opacity: 0;">
+									<div class="list1-con">今天</div>
+									<div class="bottom"></div>
+								</div>
+								<div class="ywc">
+									<div class="ywc-box">
+										<div class="ywc-btn">
+											<span></span>
+										</div>
+										<div class="ywc-con">已完成:{{count()}}项</div>
+										<div class="qc {{colors[cu].them}}" ng-click="clear()">清除已完成事项</div>
+										<div class="bottom bottom2 bottom3 bottom4"></div>
+									</div>
+									<!--<div class="bottom"></div>-->
+									<div class="ywc-list">
+										<div class="wwc-list" ng-repeat="v in colors[cu].todos track by $index" ng-if="v.state===1">
+											<div class="bottom  bottomB bottomB1"></div>
+											<div class="xxm {{colors[cu].them}}">
+												<!--<div class="buttonY">-->
+													<span class="button button{{colors[cu].them}}" ng-click="v.state=0;save2local()"></span>
+												<!--</div>-->
+												<input type="text" value="{{v.title}}" class="xinxi"/>
+												<!--<div class="nr nr1">
+													
+												</div>-->
+												<!--<div class="hide1">1</div>-->
+												<div class="inf"><div class="button2 {{colors[cu].them}}">详细信息</div></div>
+											</div>
+										</div>
+									</div>
+								</div>
+								<div class="list2">
+									<div class="wwc-box">
+										<div class="wwc-list" ng-repeat="v in colors[cu].todos track by $index">
+											<div class="bottom  bottomB bottomB1"></div>
+											<div class="xxm {{colors[cu].them}}" >
+												<!--<div class="buttonY">-->
+													<span class="button button{{colors[cu].them}}" ng-click="v.state=1;save2local()" ng-class=""></span>
+												<!--</div>-->
+												<input type="text" ng-model="v.title" class="xinxi"/>
+												<!--<div class="nr nr1">1</div>
+												<div class="hide1">1</div>-->
+												<div class="inf"><div class="button2 {{colors[cu].them}}">详细信息</div></div>
+											</div>
+										</div>
+									</div>
+									<div class="new-pro"  ng-click="colors[cu].todos.push({title:value,state:0});value='';save2local()">
+										<!--<div class="bottom bottom2"></div>-->
+										<div class="bottom  bottomB"></div>
+										<div class="nr">新项目...</div>
+									</div>
+								</div>
+								<!--<div class="list2" >-->
+									<!--<div class="bottom bottom2"></div>-->
+									
+								<!--</div>-->
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		
+		<div id="txsx">
+			<div class="jiao"></div>
+			<div class="txsx-con">
+				<div class="txsx-box"></div>
+			</div>
+		</div>
+		<div class="dhk">
+			<div class="jiao"></div>
+			<div class="dhk-con">
+				<div class="dhk-box">
+					<div class="new-list">
+						<div class="border1"></div>
+						<div class="new-listC">
+							<input type="text" class="new-title {{color2[cu1].color}}" ng-model="colors[cu].name">
+						</div>
+					</div>
+					<div class="new-color">列表颜色</div>
+						<div class="new-colors" finished>
+							<div class="color-list {{v[cu1]}}" ng-repeat="v in color1" ng-class='{active1:v[cu1]==colors[cu].them}'>
+								<div class="new-img {{v}}"></div>
+							</div>
+						</div>
+					<div class="button">
+						<div class="delete1">
+							<div ng-click="remove()">删除</div>
+						</div>
+						<div class="buttonR">
+							<div class="qx" ng-click="qx()">
+								<div>取消</div>
+							</div>
+							<div class="su1"><span></span></div>
+							<div class="wc">
+								<div ng-click="finished1()">完成</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="line1">
+					<span></span>
+				</div>
+			</div>
+		</div>
+	</body>
+</html>
